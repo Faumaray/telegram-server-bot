@@ -2,13 +2,16 @@ import asyncio
 import logging
 import requests
 import json
+import os
 
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 
 logging.basicConfig(level=logging.INFO)
+bearer = os.environ['BEARER']
+token = os.environ['TOKEN']
 
-bot = Bot(token="7161734228:AAFb0QQ-z7HIIdXkfbVShcmIlnoKw97ZOFY")
+bot = Bot(token=token)
 dp = Dispatcher()
 
 
@@ -18,7 +21,7 @@ async def start(message: types.Message):
       url="https://api.cloudvps.reg.ru/v1/reglets/3806197/actions",
       headers={
           "Authorization":
-          "Bearer 168434116d655e53065dc586de58c284753c693e76c03b2f308209936783e9df9b1369eaf05999944135fa99cde4e90b",
+          bearer,
           "Content-Type": "application/json"
       },
       data=json.dumps({"type": "start"}))
@@ -33,8 +36,7 @@ async def stop(message: types.Message):
   r = requests.post(
       url="https://api.cloudvps.reg.ru/v1/reglets/3806197/actions",
       headers={
-          "Authorization":
-          "Bearer 168434116d655e53065dc586de58c284753c693e76c03b2f308209936783e9df9b1369eaf05999944135fa99cde4e90b",
+          "Authorization": bearer,
           "Content-Type": "application/json"
       },
       data=json.dumps({"type": "stop"}))
@@ -47,8 +49,7 @@ async def status(message: types.Message):
   r = requests.get(
       url="https://api.cloudvps.reg.ru/v1/reglets/3806197",
       headers={
-          "Authorization":
-          "Bearer 168434116d655e53065dc586de58c284753c693e76c03b2f308209936783e9df9b1369eaf05999944135fa99cde4e90b"
+          "Authorization": bearer
       })
   json = r.json()
   logging.info(json)
