@@ -57,7 +57,7 @@ def status(update, text):
     json = r.json()
     logging.info(json)
     text = "Server status: " + r.json()["reglet"]["status"]
-    return TextMessage(text, , parse_mode="html")
+    return TextMessage(text, parse_mode="html")
 
 # register a function to be called for updates.
 @bot.on_update
