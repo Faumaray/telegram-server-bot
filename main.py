@@ -5,7 +5,7 @@ import json
 
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
-
+from keep_alive import keep_alive
 
 logging.basicConfig(level=logging.INFO)
 
@@ -57,6 +57,7 @@ async def status(message: types.Message):
 
 
 async def main():
+  keep_alive()
   await dp.start_polling(bot)
 
 
